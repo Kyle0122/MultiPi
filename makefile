@@ -1,7 +1,8 @@
 CC = gcc 
 LD = gcc
 FLAGS = -O2 -g -Wall -fmessage-length=0
-OUTSDIR = bin
+# -I指定头文件目录
+INCLUDE = -I./include
 
 #find all c files in folder
 SRCS = $(wildcard src/*.c)
@@ -16,7 +17,7 @@ $(TARGET): $(OBJS)
 	rm -f $(OBJS)
 
 %.o:%.c
-	$(CC) $(FLAGS) -c $^ -o $@
+	$(CC) $(FLAGS) $(INCLUDE) -c $^ -o $@
 
 clean:
 	rm -f $(OBJS) $(TARGET)
