@@ -1,9 +1,7 @@
+#define SCALE 100000
 
-struct num {
-    int giga;
-    int nanos[100];//one of uint32 stands for 9 decimal digits
-};
+int newNum(int a, int N[]);
 
-int newNum(double a, struct num *N);
+void multiply(int b, int N[]);
 
-void printNum(struct num *N);
+void printNum(int N[]);

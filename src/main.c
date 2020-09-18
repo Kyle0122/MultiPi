@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include"num.h"
-//pi BBP位算法
-int main() {
+
+double getPibyBBP(){
 	double pi = 0.0;
 	double deno = 1.0;
 	
@@ -10,9 +10,14 @@ int main() {
 		deno = deno / 16.0;
 		printf("pi(%d):\t%.50f\n", k, pi);
 	}
+	return pi;
+}
 
-	struct num a;
-	newNum(3.149, &a);
-	printNum(&a);
+int main() {
+	int a[100];
+	newNum(3, a);
+	printNum(a);
+	multiply(7, a);
+	printNum(a);
 	return 0;
 }
