@@ -17,7 +17,9 @@ int main() {
 	int a[100];
 	newNum(3, a);
 	printNum(a);
-	multiply(7, a);
+	multiply(a, 7);
+	printNum(a);
+	divide(a, 27);
 	printNum(a);
 	return 0;
 }
