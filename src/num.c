@@ -63,54 +63,41 @@ void divide(int N[], int b) {
     }
 }
 
-//c = a + b, return pointer to c
+//c = a + b, return pointer to c, note that don't let b==c
 int* add(int a[], int b[], int c[]) {
+    int biggerArray[ARRAYLENGTH];
+    int smallerArray[ARRAYLENGTH];
+    int doAdd = 0;
+
     if(a[0] > 0 && b[0] > 0) {
         c[0] = 1;
+        doAdd = 1;
     }else if(a[0] < 0 && b[0] < 0) {
         c[0] = -1;
+        doAdd = 1;
     }else if(a[0] > 0 && b[0] < 0) {
         b[0] = 1;
-        subtract(a, b, c);
         b[0] = -1;
-        return c;
     }else if(a[0] < 0 && b[0] > 0) {
         a[0] = 1;
-        subtract(b, a, c);
         a[0] = -1;
-        return c;
     }
-    int remain = 0;
-    for(int i = 99; i >= 1; i--) {
-        c[i] = a[i] + b[i] + remain;
-        remain = c[i] / SCALE;
-        c[i] = c[i] % SCALE;
-    }
-    return c;
-}
 
-//c = a - b, return pointer to c
-int* subtract(int a[], int b[], int c[]){
-    if(a[0] > 0 && b[0] < 0) {
-        b[0] = 1;
-        add(a, b, c);
-        b[0] = -1;
-        return c;
-    }else if(a[0] < 0 && b[0] > 0) {
-        b[0] = -1;
-        add(a, b, c);
-        b[0] = 1;
-        return c;
-    }else if(a[0] > 0 && b[0] > 0) {
-        return c;
-    }else if(a[0] < 0 && b[0] < 0) {
-        return c;
+    if(doAdd == 1) {
+        int remain = 0;
+        for(int i = 99; i >= 1; i--) {
+            c[i] = a[i] + b[i] + remain;
+            remain = c[i] / SCALE;
+            c[i] = c[i] % SCALE;
+        }
+    }else if(doAdd == -1){
+
     }
     return c;
 }
 
 //return 1 if a>b, -1 if a<b, 0 if a==b
-int compare(int a[], int b[]) {
+int compareAbs(int a[], int b[]) {
     for(int i = 0; i < 100; i++){
         if(a[i] > b[i]){
             return 1;
@@ -119,6 +106,14 @@ int compare(int a[], int b[]) {
         }
     }
     return 0;
+}
+
+//copy a to b, return pointer of b
+int* copyNum(int a[], int b[]){
+    for(int i = 0; i < ARRAYLENGTH; i++){
+        b[i] = a[i];
+    }
+    return b;
 }
 
 void printNum(int N[]) {

@@ -1,7 +1,7 @@
 #define SCALE 100000
-#define SCALELENGTH 5
+#define ARRAYLENGTH 100
 //the maxi value of SCALE is half the maxi value of int
-//the SCALELENGTH is the length of SCALE
+//the 
 
 int* newNum(int N[], int a);
 
@@ -11,8 +11,8 @@ void divide(int N[], int b);
 
 int* add(int a[], int b[], int c[]);
 
-int* subtract(int a[], int b[], int c[]);
+int compareAbs(int a[], int b[]);
 
-int compare(int a[], int b[]);
+int* copyNum(int a[], int b[]);
 
 void printNum(int N[]);

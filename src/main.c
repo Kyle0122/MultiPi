@@ -16,7 +16,7 @@ int main() {
 	
 	printNum(b);
 
-	printf("%d \n", compare(a, b));
+	printf("%d \n", compareAbs(a, b));
 	/*
 	subtract(b, a, c);
 	printNum(c);*/
