@@ -3,8 +3,7 @@
 
 //initialize the number array with a integer
 //N[0] is the sign of the number(-1 for minus and +1 for plus)
-//N[1] is the integer part of the number,
-//and the rest of the array is the decimal part
+//N[1] is the integer part of the number, and the rest of the array is the decimal part
 int* newNum(int N[], int a) {
     if(a < 0) {
         N[0] = -1;
@@ -19,16 +18,16 @@ int* newNum(int N[], int a) {
     return N;
 }
 
-//N = N * b
+//N = N * b, b should be  less than or equal to SCALE, which is 100000
 int* multiply(int N[], int b) {
     if(b < 0) {
         b = -b;
         N[0] = -N[0];
     }
-    if(b > SCALE) {
+    if(b >= SCALE) {
         printf("too big to multiply\n");
         return N;
-    }
+    }else if(b == 1){return N;}
     int remain = 0;
     for(int i = ARRAYLENGTH-1; i >= 1; i--) {
         N[i] = N[i] * b;
@@ -41,13 +40,13 @@ int* multiply(int N[], int b) {
     return N;
 }
 
-//N = N / b, b should be  less than or equal to SCALE, which is 100000
+//N = N / b, b should be less than or equal to 2^31/SCALE, which is 21474
 int* divide(int N[], int b) {
     if(b < 0) {
         b = -b;
         N[0] = -N[0];
     }
-    if(b > SCALE){
+    if(b >= 2147483000/SCALE){
         printf("too big to divide\n");
         return N;
     }
@@ -57,8 +56,8 @@ int* divide(int N[], int b) {
         N[i] = N[i] / b;
         if(i != ARRAYLENGTH-1) {
             N[i+1] = N[i+1] + remain;
-        }else if(remain > SCALE/2){
-            N[i] ++;
+        }else if(i == ARRAYLENGTH-1 && remain > SCALE/2){
+            N[i]++;
         }
     }
     return N;
@@ -132,7 +131,7 @@ int* add(int a[], int b[], int c[]) {
 
 //return 1 if a>b, -1 if a<b, 0 if a==b
 int compareAbs(int a[], int b[]) {
-    for(int i = 0; i < ARRAYLENGTH; i++){
+    for(int i = 1; i < ARRAYLENGTH; i++){
         if(a[i] > b[i]){
             return 1;
         }else if(a[i] < b[i]){
@@ -156,7 +155,7 @@ void printNum(int N[]) {
     }
     printf("%d.", N[1]);
     //the last number in the array is omitted sence it is usually unprecice
-    for(int i = 2; N[i] != 0 && i < ARRAYLENGTH-1; i++){
+    for(int i = 2; N[i] != 0 && i < ARRAYLENGTH-2; i++){
         printf("%05d ", N[i]);
     };
     printf("\n");
