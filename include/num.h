@@ -1,7 +1,5 @@
 #define SCALE 100000
-#define ARRAYLENGTH 12
-//the maxi value of SCALE is half the maxi value of int
-//the 
+#define ARRAYLENGTH 100
 
 int* newNum(int N[], int a);
 

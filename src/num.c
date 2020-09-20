@@ -2,7 +2,7 @@
 #include<stdio.h>
 
 //initialize the number array with a integer
-//N[0] is only the sign of the number(-1 for minus and +1 for plus)
+//N[0] is the sign of the number(-1 for minus and +1 for plus)
 //N[1] is the integer part of the number,
 //and the rest of the array is the decimal part
 int* newNum(int N[], int a) {
@@ -155,7 +155,8 @@ void printNum(int N[]) {
         printf("-");
     }
     printf("%d.", N[1]);
-    for(int i = 2; N[i] != 0 && i < ARRAYLENGTH; i++){
+    //the last number in the array is omitted sence it is usually unprecice
+    for(int i = 2; N[i] != 0 && i < ARRAYLENGTH-1; i++){
         printf("%05d ", N[i]);
     };
     printf("\n");
