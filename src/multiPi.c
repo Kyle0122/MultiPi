@@ -4,7 +4,7 @@
 void getPibyBBP(int pi[]){
 
 	newNum(pi, 0);
-	for(int k = 0; k < 1000; k++){
+	for(int k = 0; k < 102; k++){
         int a[100];divide(newNum(a, 4), (8*k +1));
         int b[100];divide(newNum(b, 2), (8*k +4));
         int c[100];divide(newNum(c, 1), (8*k +5));

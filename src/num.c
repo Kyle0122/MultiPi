@@ -41,7 +41,7 @@ int* multiply(int N[], int b) {
     return N;
 }
 
-//N = N / b
+//N = N / b, b should be  less than or equal to SCALE, which is 100000
 int* divide(int N[], int b) {
     if(b < 0) {
         b = -b;

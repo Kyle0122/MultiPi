@@ -1,5 +1,5 @@
 #define SCALE 100000
-#define ARRAYLENGTH 100
+#define ARRAYLENGTH 23
 
 int* newNum(int N[], int a);
 
