@@ -1,1 +1,2 @@
-void getPibyBBP(int pi[]);
+int* getPibyBBP(int pi[]);
+int* getPibyLeibniz(int pi[]);

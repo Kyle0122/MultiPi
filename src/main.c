@@ -4,7 +4,9 @@
 
 int main() {
 	int pi[100];
-	getPibyBBP(pi);
+	newNum(pi, 3);
+	printNum(pi);
+	divide(pi, 7);
 	printNum(pi);
 	return 0;
 }
