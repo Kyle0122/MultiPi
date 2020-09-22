@@ -129,6 +129,18 @@ int* add(int a[], int b[], int c[]) {
     return c;
 }
 
+int* sqrtNum(int N[]) {
+    int* upper = N;
+    int lower[ARRAYLENGTH];
+    newNum(lower, 0);
+    int delta[ARRAYLENGTH];
+    newNum(delta, 0);
+    delta[ARRAYLENGTH-1] = SCALE;
+
+
+    return N;
+}
+
 //return 1 if a>b, -1 if a<b, 0 if a==b
 int compareAbs(int a[], int b[]) {
     for(int i = 1; i < ARRAYLENGTH; i++){
@@ -154,7 +166,7 @@ void printNum(int N[]) {
         printf("-");
     }
     printf("%d.", N[1]);
-    //the last number in the array is omitted sence it is usually unprecice
+    //the last two numbers in the array are omitted sence it may be unprecice
     for(int i = 2; N[i] != 0 && i < ARRAYLENGTH-2; i++){
         printf("%05d ", N[i]);
     };

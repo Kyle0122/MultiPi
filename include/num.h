@@ -22,6 +22,8 @@ int* divide(int N[], int b);
 
 int* add(int a[], int b[], int c[]);
 
+int* sqrtNum(int N[]);
+
 int compareAbs(int a[], int b[]);
 
 int* copyNum(int a[], int b[]);
