@@ -18,19 +18,19 @@ int* newNum(int N[], int a) {
     return N;
 }
 
-//N = N * b, b should be  less than or equal to SCALE, which is 100000
+//N = N * b, b should be less than or equal to 2^31/SCALE, which is 21474
 int* multiply(int N[], int b) {
     if(b < 0) {
         b = -b;
         N[0] = -N[0];
     }
-    if(b >= SCALE) {
+    if(b >= 2147483000/SCALE){//2^31
         printf("too big to multiply\n");
         return N;
     }else if(b == 1){return N;}
     int remain = 0;
     for(int i = ARRAYLENGTH-1; i >= 1; i--) {
-        N[i] = N[i] * b;
+        N[i] = N[i] * b;//from here it is clear that b*N[i] <= b*SCALE <= 2^31
         N[i] = N[i] + remain;
         if(i != 1){
             remain = N[i] / SCALE;
@@ -46,13 +46,13 @@ int* divide(int N[], int b) {
         b = -b;
         N[0] = -N[0];
     }
-    if(b >= 2147483000/SCALE){
+    if(b >= 2147483000/SCALE){//2^31
         printf("too big to divide\n");
         return N;
     }
     int remain = 0;
     for(int i = 1; i < ARRAYLENGTH; i++){
-        remain = (N[i] % b) * SCALE;
+        remain = (N[i] % b) * SCALE;//from here it is clear that (N[i] % b) * SCALE <= b*SCALE <= 2^31
         N[i] = N[i] / b;
         if(i != ARRAYLENGTH-1) {
             N[i+1] = N[i+1] + remain;

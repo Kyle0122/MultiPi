@@ -8,5 +8,7 @@ int main() {
 	printNum(pi);
 	divide(pi, 7);
 	printNum(pi);
+	multiply(pi, 25000);
+	printNum(pi);
 	return 0;
 }
