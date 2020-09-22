@@ -16,15 +16,19 @@ Note that there are some limits about the high percision number functions:
 
 int* newNum(int N[], int a);
 
-int* multiply(int N[], int b);
+int* multiInt(int N[], int b);
 
-int* divide(int N[], int b);
+int* divideInt(int N[], int b);
 
-int* add(int a[], int b[], int c[]);
+int* addNum(int a[], int b[], int c[]);
+
+int* multiNum(int a[], int b[], int c[]);
 
 int* sqrtNum(int N[]);
 
 int compareAbs(int a[], int b[]);
+
+void shiftRight(int N[], int n);
 
 int* copyNum(int a[], int b[]);
 

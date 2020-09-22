@@ -1,8 +1,7 @@
 #include <stdio.h>
-#include <gmp.h>
-#include <assert.h>
+#include "num.h"
 
-int* getPibyBBP(mpf_t pi);
-int* getPibyLeibniz(mpf_t pi);
-int* getPibyEuler(mpf_t pi);
-int* getPibylaman(mpf_t pi);
+int* getPibyBBP(int pi[], int precision);
+int* getPibyLeibniz(int pi[], int precision);
+int* getPibyEuler(int pi[]);
+int* getPibylaman(int pi[]);

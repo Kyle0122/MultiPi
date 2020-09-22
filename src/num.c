@@ -19,7 +19,7 @@ int* newNum(int N[], int a) {
 }
 
 //N = N * b, b should be less than or equal to 2^31/SCALE, which is 21474
-int* multiply(int N[], int b) {
+int* multiInt(int N[], int b) {
     if(b < 0) {
         b = -b;
         N[0] = -N[0];
@@ -41,7 +41,7 @@ int* multiply(int N[], int b) {
 }
 
 //N = N / b, b should be less than or equal to 2^31/SCALE, which is 21474
-int* divide(int N[], int b) {
+int* divideInt(int N[], int b) {
     if(b < 0) {
         b = -b;
         N[0] = -N[0];
@@ -63,8 +63,8 @@ int* divide(int N[], int b) {
     return N;
 }
 
-//c = a + b, return pointer to c, note that don't let b==c
-int* add(int a[], int b[], int c[]) {
+//c = a + b, return pointer to c, note that don't let pointer b equals to c
+int* addNum(int a[], int b[], int c[]) {
     //variable ab represents the relation between abs(a) and abs(b)
     int ab = compareAbs(a, b);
     int *biggerArray;
@@ -129,6 +129,20 @@ int* add(int a[], int b[], int c[]) {
     return c;
 }
 
+//c = a * b, return pointer to c, note that don't let either pointer b or a equals to c
+int* multiNum(int a[], int b[], int c[]){
+    c[0] = a[0] * b[0];
+
+    for(int i = 1; i < ARRAYLENGTH; i++){
+        int ai[100];
+        copyNum(a, ai);
+        multiInt(ai, b[i]);
+        shiftRight(ai, (i - 1) * 5);
+        addNum(c, ai, c);
+    }
+    return c;
+}
+
 int* sqrtNum(int N[]) {
     int* upper = N;
     int lower[ARRAYLENGTH];
@@ -153,6 +167,19 @@ int compareAbs(int a[], int b[]) {
     return 0;
 }
 
+void shiftRight(int N[], int n) {
+    int shift = n / 5;
+    for(int i = ARRAYLENGTH - 1; i > shift; i--){
+        N[i] = N[i-shift];
+    }
+    for(int i = 1; i <= shift; i++){
+        N[i] = 0;
+    }
+    for(int i = 0; i < (n % 5); i++){
+        divideInt(N, 10);
+    }
+}
+
 //copy a to b, return pointer of b
 int* copyNum(int a[], int b[]){
     for(int i = 0; i < ARRAYLENGTH; i++){
@@ -167,7 +194,7 @@ void printNum(int N[]) {
     }
     printf("%d.", N[1]);
     //the last two numbers in the array are omitted sence it may be unprecice
-    for(int i = 2; N[i] != 0 && i < ARRAYLENGTH-2; i++){
+    for(int i = 2; i < ARRAYLENGTH-2; i++){
         printf("%05d ", N[i]);
     };
     printf("\n");

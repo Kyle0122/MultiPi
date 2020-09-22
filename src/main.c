@@ -1,21 +1,22 @@
 #include <stdio.h>
-#include <gmp.h>
-#include <assert.h>
+#include "num.h"
 #include "multiPi.h"
 
 int main() {
-	mpf_t n;
-	int flag;
-	/* 1. Initialize the number */
-	mpf_init2(n, 100);
-	mpf_set_ui(n,0);
-	/* 2. Parse the input string as a base 10 number */
-	flag = mpf_set_str(n,"8.9997979879869999994355545644653456345543443579869", 10);
-	assert (flag == 0); /* If flag is not 0 then the operation failed */
-	/* Print n */
-	printf ("n = ");
-	mpf_out_str(stdout, 10, 0, n);
-	printf ("\n");
+	int pi[100];
+	newNum(pi, 8);
+	divideInt(pi, 3);
 
+	//getPibyBBP(pi, 100);
+	//getPibyLeibniz(pi, 3);
+
+	int b[100];
+	newNum(b, 8);
+
+	int c[100];
+	newNum(c, 0);
+	multiNum(pi, b, c);
+	
+	printNum(c);
 	return 0;
 }
