@@ -4,19 +4,19 @@
 
 int main() {
 	int pi[100];
-	newNum(pi, 8);
-	divideInt(pi, 3);
+	newNum(pi, 0);
 
 	//getPibyBBP(pi, 100);
-	//getPibyLeibniz(pi, 3);
+	getPibyLeibniz(pi, 5);
 
-	int b[100];
+	/*int b[100];
 	newNum(b, 8);
+	divideInt(b, 3);
 
 	int c[100];
-	newNum(c, 0);
-	multiNum(pi, b, c);
+	newNum(c, 4);
+	multiNum(b, c, pi);*/
 	
-	printNum(c);
+	printNum(pi);
 	return 0;
 }

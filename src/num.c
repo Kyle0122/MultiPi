@@ -18,7 +18,7 @@ int* newNum(int N[], int a) {
     return N;
 }
 
-//N = N * b, b should be less than or equal to 2^31/SCALE, which is 21474
+//N = N * b, b should be less than or equal to 2^31/SCALE, which is 2147483
 int* multiInt(int N[], int b) {
     if(b < 0) {
         b = -b;
@@ -40,7 +40,23 @@ int* multiInt(int N[], int b) {
     return N;
 }
 
-//N = N / b, b should be less than or equal to 2^31/SCALE, which is 21474
+
+//c = a * b, return pointer to c, note that don't let either pointer b or a equals to c
+int* multiNum(int a[], int b[], int c[]){
+    newNum(c, 0);
+    c[0] = a[0] * b[0];
+
+    for(int i = 1; i < ARRAYLENGTH; i++){
+        int ai[100];
+        copyNum(a, ai);
+        multiInt(ai, b[i]);
+        shiftRight(ai, (i - 1) * 5);
+        addNum(c, ai, c);
+    }
+    return c;
+}
+
+//N = N / b, b should be less than or equal to 2^31/SCALE, which is 2147483
 int* divideInt(int N[], int b) {
     if(b < 0) {
         b = -b;
@@ -61,6 +77,14 @@ int* divideInt(int N[], int b) {
         }
     }
     return N;
+}
+
+//c = a / b, 
+int* devideNum(int a[], int b[], int c[]){
+    newNum(c, 0);
+    c[0] = a[0] * b[0];
+
+    return c;
 }
 
 //c = a + b, return pointer to c, note that don't let pointer b equals to c
@@ -129,20 +153,6 @@ int* addNum(int a[], int b[], int c[]) {
     return c;
 }
 
-//c = a * b, return pointer to c, note that don't let either pointer b or a equals to c
-int* multiNum(int a[], int b[], int c[]){
-    c[0] = a[0] * b[0];
-
-    for(int i = 1; i < ARRAYLENGTH; i++){
-        int ai[100];
-        copyNum(a, ai);
-        multiInt(ai, b[i]);
-        shiftRight(ai, (i - 1) * 5);
-        addNum(c, ai, c);
-    }
-    return c;
-}
-
 int* sqrtNum(int N[]) {
     int* upper = N;
     int lower[ARRAYLENGTH];
@@ -168,14 +178,14 @@ int compareAbs(int a[], int b[]) {
 }
 
 void shiftRight(int N[], int n) {
-    int shift = n / 5;
+    int shift = n / 3;
     for(int i = ARRAYLENGTH - 1; i > shift; i--){
         N[i] = N[i-shift];
     }
     for(int i = 1; i <= shift; i++){
         N[i] = 0;
     }
-    for(int i = 0; i < (n % 5); i++){
+    for(int i = 0; i < (n % 3); i++){
         divideInt(N, 10);
     }
 }
@@ -195,7 +205,7 @@ void printNum(int N[]) {
     printf("%d.", N[1]);
     //the last two numbers in the array are omitted sence it may be unprecice
     for(int i = 2; i < ARRAYLENGTH-2; i++){
-        printf("%05d ", N[i]);
+        printf("%03d ", N[i]);
     };
     printf("\n");
 }

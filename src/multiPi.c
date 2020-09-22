@@ -37,16 +37,17 @@ int* getPibyLeibniz(int pi[], int precision) {
 
     for (int k = 0; 1 ; k++) {
         int delta[100];
-        divideInt(newNum(delta, 1), 2 * k +1);
+        divideInt(newNum(delta, 1), 2 * k + 1);
         if (k % 2 == 1) {
             delta[0] = -1;
         }
         multiInt(delta, 4);
         addNum(pi, delta, pi);
-        
-        printNum(pi);
+        //printNum(pi);
         if(compareAbs(delta, precisionDelta) == -1){
-            //printNum(delta);
+            printNum(delta);
+            printNum(precisionDelta);
+            printf(" p = %d\n", precision + 1);
             break;
         }
     }
