@@ -44,15 +44,14 @@ int* multiInt(int N[], int b) {
 //c = a * b, return pointer to c, note that don't let either pointer b or a equals to c
 int* multiNum(int a[], int b[], int c[]){
     newNum(c, 0);
-    c[0] = a[0] * b[0];
-
     for(int i = 1; i < ARRAYLENGTH; i++){
         int ai[100];
         copyNum(a, ai);
         multiInt(ai, b[i]);
-        shiftRight(ai, (i - 1) * 5);
+        shiftRight(ai, (i - 1) * 3);
         addNum(c, ai, c);
     }
+    c[0] = a[0] * b[0];
     return c;
 }
 
@@ -79,11 +78,37 @@ int* divideInt(int N[], int b) {
     return N;
 }
 
-//c = a / b, 
-int* devideNum(int a[], int b[], int c[]){
+//c = a / b
+int* divideNum(int a[], int b[], int c[]){
     newNum(c, 0);
+    int leftOvers[100];
+    copyNum(a, leftOvers);
+    leftOvers[0] = 1;
+    int smallDivideNum[100];
+    copyNum(b, smallDivideNum);
+    while(smallDivideNum[1] == 0) {
+        multiInt(smallDivideNum, SCALE);
+        multiInt(leftOvers, SCALE);
+    }
+    smallDivideNum[0] = -1;
+    for(int i = 1; i < ARRAYLENGTH; i++){
+        //printNum(leftOvers);printNum(smallDivideNum);printNum(c);printf("#####\n");
+        if(compareAbs(leftOvers, smallDivideNum) >= 0) {
+            c[i] = leftOvers[i] / (smallDivideNum[i] + 1);
+            int multipliedSmallDivideNum[100];
+            copyNum(smallDivideNum, multipliedSmallDivideNum);
+            multiInt(multipliedSmallDivideNum, c[i]);
+            addNum(leftOvers, multipliedSmallDivideNum, leftOvers);
+            while(compareAbs(leftOvers, smallDivideNum) >= 0) {
+                addNum(leftOvers, smallDivideNum, leftOvers);
+                c[i]++;
+            }
+        }else {
+            c[i] = 0;
+        }
+        divideInt(smallDivideNum, SCALE);
+    }
     c[0] = a[0] * b[0];
-
     return c;
 }
 
@@ -153,16 +178,30 @@ int* addNum(int a[], int b[], int c[]) {
     return c;
 }
 
-int* sqrtNum(int N[]) {
-    int* upper = N;
-    int lower[ARRAYLENGTH];
-    newNum(lower, 0);
-    int delta[ARRAYLENGTH];
-    newNum(delta, 0);
-    delta[ARRAYLENGTH-1] = SCALE;
+int* sqrtNum(int a[]) {
+    int precisionDelta[100];
+    newNum(precisionDelta, 4);
+    shiftRight(precisionDelta, 3 * (ARRAYLENGTH - 4) - 1);
 
-
-    return N;
+    int x[100];
+    copyNum(a, x);
+    divideInt(x, 2);
+    int b[100];
+    int lastX[100];
+    int flag = 1;
+    for(int i = 0; flag; i++){
+        newNum(b, 0);
+        divideNum(a, x, b);
+        divideInt(addNum(x, b, x), 2);
+        //printNum(x);
+        lastX[0] = -1;
+        if(compareAbs(addNum(lastX, x, lastX), precisionDelta) == -1) {
+            flag = 0;
+        }
+        copyNum(x, lastX);
+    }
+    copyNum(x, a);
+    return a;
 }
 
 //return 1 if a>b, -1 if a<b, 0 if a==b
