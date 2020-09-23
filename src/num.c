@@ -24,18 +24,13 @@ int* multiInt(int N[], int b) {
         b = -b;
         N[0] = -N[0];
     }
-    if(b >= 2147483000/SCALE){//2^31
-        printf("too big to multiply\n");
-        return N;
-    }else if(b == 1){return N;}
-    int remain = 0;
+    if(b == 1){return N;}
+    long remain = 0;
     for(int i = ARRAYLENGTH-1; i >= 1; i--) {
-        N[i] = N[i] * b;//from here it is clear that b*N[i] <= b*SCALE <= 2^31
-        N[i] = N[i] + remain;
-        if(i != 1){
-            remain = N[i] / SCALE;
-            N[i] = N[i] % SCALE;
-        }
+        long currentBit = N[i] * b + remain;
+        N[i] = currentBit % SCALE;
+        remain = currentBit / SCALE;
+        if(i == 1) {N[i] = currentBit;}
     }
     return N;
 }
@@ -55,23 +50,19 @@ int* multiNum(int a[], int b[], int c[]){
     return c;
 }
 
-//N = N / b, b should be less than or equal to 2^31/SCALE, which is 2147483
+//N = N / b,
 int* divideInt(int N[], int b) {
     if(b < 0) {
         b = -b;
         N[0] = -N[0];
     }
-    if(b >= 2147483000/SCALE){//2^31
-        printf("too big to divide\n");
-        return N;
-    }
-    int remain = 0;
+    if(b == 1){return N;}
+    long remain = 0;
     for(int i = 1; i < ARRAYLENGTH; i++){
-        remain = (N[i] % b) * SCALE;//from here it is clear that (N[i] % b) * SCALE <= b*SCALE <= 2^31
-        N[i] = N[i] / b;
-        if(i != ARRAYLENGTH-1) {
-            N[i+1] = N[i+1] + remain;
-        }else if(i == ARRAYLENGTH-1 && remain > SCALE/2){
+        long currentBit = (N[i] + remain * SCALE);
+        N[i] = currentBit / b;
+        remain = currentBit % b;
+        if(i == ARRAYLENGTH-1 && remain > SCALE/2){
             N[i]++;
         }
     }

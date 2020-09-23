@@ -30,10 +30,10 @@ int* getPibyLeibniz(int pi[], int precision) {
     newNum(pi, 0);
     /*initialize a small number to be precisionDelta*/
     int precisionDelta[100];
-    newNum(precisionDelta, 4);
+    newNum(precisionDelta, 2);
     shiftRight(precisionDelta, precision + 1);
 
-    for (int k = 0; k < 1000000; k++) {
+    for (int k = 0; k < 1000000000; k++) {
         int delta[100];
         newNum(delta, 1);
         divideInt(delta, (2 * k + 1));
@@ -54,11 +54,11 @@ int* getPibyEuler(int pi[], int precision){
     /*initialize a small number to be precisionDelta*/
     int precisionDelta[100];
     newNum(precisionDelta, 1);
-    shiftRight(precisionDelta, precision * 2);
+    shiftRight(precisionDelta, (precision + 1) * 2 );
 
     newNum(pi, 0);
     int delta[100];
-    for(int k = 1; k < 2000000; k++) {
+    for(int k = 1; k < 1000000000; k++) {
         newNum(delta, 6);
         divideInt(delta, k);
         divideInt(delta, k);
