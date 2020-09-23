@@ -6,9 +6,12 @@ int main() {
 	int pi[100];
 	newNum(pi, 0);
 
-	//getPibyBBP(pi, 9);
-	//getPibyLeibniz(pi, 6);
+	getPibyBBP(pi, 9);
+	printNum(pi);
+	getPibyLeibniz(pi, 6);
+	printNum(pi);
 	getPibyEuler(pi, 6);
+	printNum(pi);
 
 /*
 	int b[100];
@@ -21,6 +24,5 @@ int main() {
 	//multiInt(c, 1000000000);
 	//divideNum(b, c, pi);*/
 	
-	printNum(pi);
 	return 0;
 }
