@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "num.h"
 
-int* getPibyBBP(int pi[], int precision);
-int* getPibyLeibniz(int pi[], int precision);
-int* getPibyEuler(int pi[], int precision);
-int* getPibylaman(int pi[]);
+int getPibyBBP(int pi[], int precision);
+int getPibyLeibniz(int pi[], int precision);
+int getPibyEuler(int pi[], int precision);
+int getPibylaman(int pi[], int n);

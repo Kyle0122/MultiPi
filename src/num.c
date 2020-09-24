@@ -149,11 +149,12 @@ int* addNum(int a[], int b[], int c[]) {
 
     if(doAdd == 1) {
         int remain = 0;
-        for(int i = ARRAYLENGTH-1; i >= 1; i--) {
+        for(int i = ARRAYLENGTH-1; i > 1; i--) {
             c[i] = a[i] + b[i] + remain;
             remain = c[i] / SCALE;
             c[i] = c[i] % SCALE;
         }
+        c[1] = a[1] + b[1] + remain;
     }else if(doAdd == -1){
         int remain = 0;
         for(int i = ARRAYLENGTH-1; i >= 1; i--) {
@@ -174,21 +175,21 @@ int* sqrtNum(int a[]) {
     newNum(precisionDelta, 4);
     shiftRight(precisionDelta, 3 * (ARRAYLENGTH - 4) - 1);
 
-    int x[100];
+    int x[100], lastX[100];
     copyNum(a, x);
-    divideInt(x, 2);
+    copyNum(a, lastX);
     int b[100];
-    int lastX[100];
     int flag = 1;
-    for(int i = 0; flag; i++){
+    //x = 0.5(lastX + a / lastX)
+    for(int i = 0; flag; i++) {
         newNum(b, 0);
-        divideNum(a, x, b);
-        divideInt(addNum(x, b, x), 2);
-        //printNum(x);
-        lastX[0] = -1;
-        if(compareAbs(addNum(lastX, x, lastX), precisionDelta) == -1) {
+        divideNum(a, lastX, b);
+        addNum(lastX, b, x);
+        divideInt(x , 2);
+        x[0] = -1;
+        if(compareAbs(addNum(lastX, x, b), precisionDelta) == -1) {
             flag = 0;
-        }
+        }else { x[0] = 1; }
         copyNum(x, lastX);
     }
     copyNum(x, a);
