@@ -109,6 +109,7 @@ int getPibylaman(int pi[], int n) {
         multiNum(b, c, delta);
         addNum(sigma, delta, sigma);
     }
+    printNum(sigma);
     /*
      1   ./ 8  -- (4k)!  26390k + 1103
     -- = ----- > ------- -------------

@@ -189,7 +189,8 @@ int* sqrtNum(int a[]) {
         x[0] = -1;
         if(compareAbs(addNum(lastX, x, b), precisionDelta) == -1) {
             flag = 0;
-        }else { x[0] = 1; }
+        }
+        x[0] = 1;
         copyNum(x, lastX);
     }
     copyNum(x, a);
