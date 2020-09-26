@@ -1,5 +1,5 @@
 #define SCALE 1000
-#define ARRAYLENGTH 25
+#define ARRAYLENGTH 200
 /* About high percision number:
 There are five function to calculate high percision number array: Add, multiply, divide, compareAbs.
 

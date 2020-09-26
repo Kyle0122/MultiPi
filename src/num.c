@@ -61,7 +61,7 @@ int* multiNum(int a[], int b[], int c[]){
 	return c;
 }
 
-//N = N / b,
+//N = N / b;
 int* divideInt(int N[], int b) {
 	if(b < 0) {
 		b = -b;

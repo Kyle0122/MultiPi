@@ -13,7 +13,7 @@ int main() {
 	//printf("n = %d\t", n);printNum(pi);
 	//n = getPibyEuler(pi, 5);
 	//printf("n = %d\t", n);printNum(pi);
-	getPibylaman(pi, 10);
+	getPibylaman(pi, 40);
 	printf("n = 10\t");printNum(pi);
 
 /*

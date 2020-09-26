@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include "num.h"
 
+/*BBP formula，--  1     4      2      1      1
+        pi =   > ---- (---- - ---- - ---- - ----)
+               --16^4  8k+1   8k+4   8k+5   8k+6
+*/
 int getPibyBBP(int pi[], int precision){
 	newNum(pi, 0);
 	int precisionDelta[ARRAYLENGTH];
