@@ -3,9 +3,9 @@
 
 /*BBP formula，--  1     4      2      1      1
         pi =   > ---- (---- - ---- - ---- - ----)
-               --16^4  8k+1   8k+4   8k+5   8k+6
+               --16^k  8k+1   8k+4   8k+5   8k+6
 */
-int getPibyBBP(int pi[], int precision){
+int getPibyBBP(int pi[], int precision) {
 	newNum(pi, 0);
 	int precisionDelta[ARRAYLENGTH];
 	newNum(precisionDelta, 4);
@@ -54,7 +54,7 @@ int getPibyLeibniz(int pi[], int precision) {
 	return k;
 }
 
-int getPibyEuler(int pi[], int precision){
+int getPibyEuler(int pi[], int precision) {
 	newNum(pi, 0);
 	/*initialize a small number to be precisionDelta*/
 	int precisionDelta[ARRAYLENGTH];
@@ -71,7 +71,14 @@ int getPibyEuler(int pi[], int precision){
 		
 		if(compareAbs(delta, precisionDelta) == -1){
 			break;
-		}
+		}/*
+		if(k%1000 == 0){
+			printf("Euler, n=%d,\tdelta:", k);
+			printNum(delta, 30);
+			copyNum(pi, delta);
+			sqrtNum(delta);
+			printNum(delta, 30);
+		}*/
 	}
 	sqrtNum(pi);
 	return k;
@@ -85,9 +92,12 @@ pi   99^2  -- (k!)^4   396^(4k)
 所以在下面用b来存储公式中和阶乘和指数相关的部分,
 它是小于1的高精度小数。
 */
-int getPibylaman(int pi[], int n) {
-	int sigma[ARRAYLENGTH];
-	newNum(sigma, 0);
+int getPibyLaman(int pi[], int precision) {
+	newNum(pi, 3);
+	/*initialize a small number to be precisionDelta*/
+	int precisionDelta[ARRAYLENGTH];
+	newNum(precisionDelta, 4);
+	shiftRight(precisionDelta, precision + 1);
 	/*    99^2
 	a is  -----
 		  ./ 8
@@ -100,13 +110,29 @@ int getPibylaman(int pi[], int n) {
 	b is  ----------------
           (k!)^4 * 396^(4x)
 	*/
-	int b[ARRAYLENGTH];
+	int b[ARRAYLENGTH], sigma[ARRAYLENGTH], delta[ARRAYLENGTH];
 	newNum(b, 1);
-	for(int k = 0; k < n; k++) {
-		int delta[ARRAYLENGTH];
+	newNum(sigma, 0);
+	for(int k = 0; k < 1000; k++) {
 		copyNum(b, delta);
 		multiInt(delta, 26390 * k + 1103);
 		addNum(sigma, delta, sigma);
+		/*
+		1   ./ 8  -- (4k)!  26390k + 1103
+		-- = ----- > ------- -------------
+		pi   99^2  -- (k!)^4   396^(4k)
+		thus:
+				/ -- (4k)!  26390k + 1103
+		pi = a /  > ------- -------------
+			/   -- (k!)^4   396^(4k)
+		*/
+		divideNum(a, sigma, delta);
+		delta[0] = -1;
+		if(compareAbs(addNum(delta, pi, delta), precisionDelta) == -1 ){
+			return k;
+		}else {
+			divideNum(a, sigma, pi);
+		}
 		/*             (4k + 1)* (4k + 2)* (4k + 3)* (4k + 4)
 		b[k+1] = b[k] -----------------------------------------
 					  (k + 1)* (k + 1)* (k + 1)* (k + 1) *396^4
@@ -116,15 +142,7 @@ int getPibylaman(int pi[], int n) {
 		divideInt(b, 396*396);
 		divideInt(b, 396*396);
 	}
-	/*
-	 1   ./ 8  -- (4k)!  26390k + 1103
-	-- = ----- > ------- -------------
-	pi   99^2  -- (k!)^4   396^(4k)
-	thus:
-			/ -- (4k)!  26390k + 1103
-	pi = a /  > ------- -------------
-		  /   -- (k!)^4   396^(4k)
-	*/
+	
 	divideNum(a, sigma, pi);
 	return 0;
 }
