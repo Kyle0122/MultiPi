@@ -1,6 +1,6 @@
 CC = gcc
 LD = gcc
-FLAGS = -O2 -pg -Wall -fmessage-length=0 
+FLAGS = -O3 -pg -Wall -fmessage-length=0 
 # -I指定头文件目录
 INCLUDE = -I./include
 #Output directry
