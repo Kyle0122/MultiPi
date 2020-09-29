@@ -26,3 +26,6 @@ clean:
 
 run: $(TARGET)
 	./$(TARGET)
+
+getpic:
+	gprof -q bin/main gmon.out  |gprof2dot|dot -Tpng -o time.png
