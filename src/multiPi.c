@@ -59,7 +59,7 @@ int getPibyEuler(int pi[], int precision){
 	/*initialize a small number to be precisionDelta*/
 	int precisionDelta[ARRAYLENGTH];
 	newNum(precisionDelta, 1);
-	shiftRight(precisionDelta, (precision + 1) * 2 );
+	shiftRight(precisionDelta, (precision) * 2 );
 
 	int delta[ARRAYLENGTH];
 	int k;
@@ -82,8 +82,8 @@ int getPibyEuler(int pi[], int precision){
 -- = ----- > ------- -------------
 pi   99^2  -- (k!)^4   396^(4k)
 高精度库的整数部分的最大值为Int类型最大值，
-所以在下面用来存储公式中和阶乘和指数相关的部分的系数的变量
-（b和c）都是小于1的高精度小数。
+所以在下面用b来存储公式中和阶乘和指数相关的部分,
+它是小于1的高精度小数。
 */
 int getPibylaman(int pi[], int n) {
 	int sigma[ARRAYLENGTH];
@@ -96,36 +96,25 @@ int getPibylaman(int pi[], int n) {
 	newNum(a, 1);
 	sqrtNum(divideInt(a, 8));
 	multiInt(a, 99*99);
-	/*      (4k)!
-	b is  (------)^-1
-		   (k!)^4
+	/*         (4k)!
+	b is  ----------------
+          (k!)^4 * 396^(4x)
 	*/
 	int b[ARRAYLENGTH];
 	newNum(b, 1);
-	/*        1
-	c is  -------- 
-		  396^(4k)
-	*/
-	int c[ARRAYLENGTH];
-	newNum(c, 1);
 	for(int k = 0; k < n; k++) {
 		int delta[ARRAYLENGTH];
-		newNum(delta, 0);
-		divideNum(c, b, delta);
+		copyNum(b, delta);
 		multiInt(delta, 26390 * k + 1103);
 		addNum(sigma, delta, sigma);
-		/*            (k + 1)* (k + 1)* (k + 1)* (k + 1)
-		b[k+1] = b[k] -----------------------------------
-					  (4k + 1)*(4k + 2)*(4k + 3)*(4k + 4)
+		/*             (4k + 1)* (4k + 2)* (4k + 3)* (4k + 4)
+		b[k+1] = b[k] -----------------------------------------
+					  (k + 1)* (k + 1)* (k + 1)* (k + 1) *396^4
 		*/
-		multiInt(b, (k + 1)*(k + 1)*(k + 1)*(k + 1));
-		divideInt(b, (4*k + 1)*(4*k + 2)*(4*k + 3)*(4*k + 4));
-		/*              1
-		c[k+1] = c[k] -----
-					  396^4
-		*/
-		divideInt(c, 396*396);
-		divideInt(c, 396*396);
+		multiInt(b, (4*k + 1)*(4*k + 2)*(4*k + 3)*(4*k + 4));
+		divideInt(b, (k + 1)*(k + 1)*(k + 1)*(k + 1));
+		divideInt(b, 396*396);
+		divideInt(b, 396*396);
 	}
 	/*
 	 1   ./ 8  -- (4k)!  26390k + 1103

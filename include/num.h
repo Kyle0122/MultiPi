@@ -1,5 +1,5 @@
 #define SCALE 1000
-#define ARRAYLENGTH 200
+#define ARRAYLENGTH 38
 /* About high percision number:
 There are five function to calculate high percision number array: Add, multiply, divide, compareAbs.
 
@@ -33,4 +33,4 @@ void shiftRight(int N[], int n);
 
 int* copyNum(int a[], int b[]);
 
-void printNum(int N[]);
+void printNum(int N[], int n);

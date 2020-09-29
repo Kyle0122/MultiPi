@@ -72,7 +72,7 @@ int* divideInt(int N[], int b) {
 	for(int i = 1; i < ARRAYLENGTH; i++){
 		long currentBit = (N[i] + remain * SCALE);
 		N[i] = currentBit / b;
-		remain = currentBit % b;
+		remain = (int) (currentBit - N[i]*b);
 		if(i == ARRAYLENGTH-1 && remain > SCALE/2){
 			N[i]++;
 		}
@@ -240,14 +240,18 @@ int* copyNum(int a[], int b[]){
 	return b;
 }
 
-void printNum(int N[]) {
+void printNum(int N[], int n) {
 	if(N[0] < 0){
 		printf("-");
 	}
 	printf("%d.", N[1]);
-	//the last two numbers in the array are omitted sence it may be unprecice
-	for(int i = 2; i < ARRAYLENGTH; i++){
+	for(int i = 2; i < n/3 + 2; i++){
 		printf("%03d ", N[i]);
 	};
+	if(n%3 == 2) {
+		printf("%d", N[n/3+2]/10);
+	}else if(n%3 == 1) {
+		printf("%d", N[n/3+2]/100);
+	}
 	printf("\n");
 }

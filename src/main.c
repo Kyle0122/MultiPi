@@ -8,26 +8,13 @@ int main() {
 
 	int n;
 	n = getPibyBBP(pi, 3*(ARRAYLENGTH-4));
-	printf("n = %d\t", n);printNum(pi);
+	printf("n = %d\t", n);printNum(pi, 8);
 	//n = getPibyLeibniz(pi, 6);
 	//printf("n = %d\t", n);printNum(pi);
-	//n = getPibyEuler(pi, 5);
+	//n = getPibyEuler(pi, 6);
 	//printf("n = %d\t", n);printNum(pi);
-	getPibylaman(pi, 40);
-	printf("n = 10\t");printNum(pi);
-
-/*
-	int a[ARRAYLENGTH], b[ARRAYLENGTH], c[ARRAYLENGTH];
-	newNum(a, 99 * 99 * 99 * 99);
-	newNum(b, 73);
-	divideInt(a, 73);
-	divideInt(b, 371);
-	multiInt(a, 91);
-	printNum(a);
-	printNum(b);
-	divideNum(a, b, c);*/
-
-	//printNum(c);
+	//getPibylaman(pi, 30);
+	//printf("n = 10\t");printNum(pi);
 	
 	return 0;
 }
