@@ -68,11 +68,11 @@ int* divideInt(int N[], int b) {
 		N[0] = -N[0];
 	}
 	if(b == 1){return N;}
-	long remain = 0;
+	int remain = 0;
 	for(int i = 1; i < ARRAYLENGTH; i++){
 		long currentBit = (N[i] + remain * SCALE);
 		N[i] = currentBit / b;
-		remain = (int) (currentBit - N[i]*b);
+		remain = currentBit % b;
 		if(i == ARRAYLENGTH-1 && remain > SCALE/2){
 			N[i]++;
 		}

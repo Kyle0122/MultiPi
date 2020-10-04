@@ -1,6 +1,6 @@
-CC = gcc
-LD = gcc
-FLAGS = -O2 -pg -Wall -fmessage-length=0 
+CC = clang
+LD = clang
+FLAGS = -O3 -Wall -fmessage-length=0 
 # -I指定头文件目录
 INCLUDE = -I./include
 #Output directry
@@ -15,7 +15,7 @@ TARGET = $(OUTPUTDIR)/main
 .PHONY: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(LD) -pg -o $(TARGET) $(OBJS)
+	$(LD) -o $(TARGET) $(OBJS)
 	rm -f $(OBJS)
 
 %.o: %.c
