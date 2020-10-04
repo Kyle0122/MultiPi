@@ -70,7 +70,7 @@ int* divideInt(int N[], int b) {
 	if(b == 1){return N;}
 	int remain = 0;
 	for(int i = 1; i < ARRAYLENGTH; i++){
-		long currentBit = (N[i] + remain * SCALE);
+		int currentBit = (N[i] + remain * SCALE);
 		N[i] = currentBit / b;
 		remain = currentBit % b;
 		if(i == ARRAYLENGTH-1 && remain > SCALE/2){
@@ -94,7 +94,6 @@ int* divideNum(int a[], int b[], int c[]){
 	}
 	smallDivideNum[0] = -1;
 	for(int i = 1; i < ARRAYLENGTH; i++){
-		//printNum(leftOvers);printNum(smallDivideNum);printNum(c);printf("#####\n");
 		if(compareAbs(leftOvers, smallDivideNum) >= 0) {
 			c[i] = leftOvers[i] / (smallDivideNum[i] + 1);
 			int multipliedSmallDivideNum[ARRAYLENGTH];
