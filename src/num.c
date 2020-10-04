@@ -70,7 +70,7 @@ int* divideInt(int N[], int b) {
 	if(b == 1){return N;}
 	int remain = 0;
 	for(int i = 1; i < ARRAYLENGTH; i++){
-		int currentBit = (N[i] + remain * SCALE);
+		long currentBit = (N[i] + remain * SCALE);
 		N[i] = currentBit / b;
 		remain = currentBit % b;
 		if(i == ARRAYLENGTH-1 && remain > SCALE/2){
