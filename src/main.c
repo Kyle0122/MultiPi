@@ -4,11 +4,12 @@
 #include "multiPi.h"
 
 int main(int argc, char *argv[]) {
-	int pi[ARRAYLENGTH];
-	newNum(pi, 0);
-	int n = 0;
-
 	int precision = atoi(argv[2]);
+	int length = precision/3 + 8;
+	int pi[length];
+	newNum(pi, 0, length);
+	int n = 0;\
+
 	if(argv[1][0] == 'L' && argv[1][1] == 'e'){
 		printf("calc pi by Leibniz, precision = %d:\n", precision);
 		n = getPibyLeibniz(pi, precision);
