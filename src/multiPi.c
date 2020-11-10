@@ -11,7 +11,7 @@ int getPibyBBP(int pi[], int precision) {
 	int precisionDelta[length];
 	newNum(precisionDelta, 4, length);
 	shiftRight(precisionDelta, precision + 1, length);
-	printNum(precisionDelta, precision + 1);
+	//printNum(precisionDelta, precision + 1);
 	int k;
 	for(k = 0; k < 1000000; k++) {
 		int a[length];divideInt(newNum(a, 4, length), (8*k +1), length);

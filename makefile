@@ -29,3 +29,6 @@ run: $(TARGET)
 
 getpic:
 	gprof -q bin/main gmon.out  |gprof2dot|dot -Tpng -o time.png
+
+makelib:
+	gcc -fPIC -shared -O3 -Wall -I./include src/multiPi.c src/num.c -o bin/multipi.so
